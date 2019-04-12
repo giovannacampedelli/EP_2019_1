@@ -78,7 +78,7 @@ def main():
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
 
-    print("Você morreu!")
+    print("Você faleceu!")
 
 
 # Programa principal.

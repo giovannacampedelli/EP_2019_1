@@ -71,9 +71,16 @@ def main():
             game_over = True
         else:
 
+            
             # Aluno B: substitua este comentário e a linha abaixo pelo código
             # para pedir a escolha do usuário.
-            escolha = ""
+            print("Suas escolhas são: ")
+            for e, desc in opcoes.items():
+                print("{0}:{1}".format(e, desc))
+                
+            escolha = input("Para onde você deseja ir?: ")
+
+
 
             if escolha in opcoes:
                 nome_cenario_atual = escolha

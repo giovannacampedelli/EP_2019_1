@@ -61,6 +61,8 @@ def main():
 
         # Aluno A: substitua este comentário pelo código para imprimir 
         # o cenário atual.
+        print()
+        print()
         print (cenario_atual["titulo"])
         print ("-" * len(cenario_atual["titulo"]))
         print (cenario_atual["descricao"])
@@ -74,10 +76,11 @@ def main():
             
             # Aluno B: substitua este comentário e a linha abaixo pelo código
             # para pedir a escolha do usuário.
+            print()
             print("Suas escolhas são: ")
             for e, desc in opcoes.items():
-                print("{0}:{1}".format(e, desc))
-                
+                print("{0}: {1}".format(e, desc))
+            print()
             escolha = input("Para onde você deseja ir?: ")
 
 

@@ -11,7 +11,7 @@ def carregar_cenarios():
             "descricao": "Voce esta no saguao de entrada do insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
-                "quarto andar": "Tomar o elevador para o andar do professor",
+                "quarto andar": "Subir para o andar sagrado da engenharia",
                 "biblioteca": "Ir para a biblioteca"
             }
         },
@@ -35,20 +35,37 @@ def carregar_cenarios():
             "descricao": "Voce chegou ao quarto andar",
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguao de entrada",
-                "wii": "Jogar wii e aceitar a DP"
+                "wii": "Jogar Wii",
+                "405": "Sala 405",
             }
         },
+        "405": {
+            "titulo": "sala 405",
+            "descricao": "Voce chegou à sala secreta de treinamentos. Um misterioso ninja appeared",
+            "opcoes": {"quarto andar": "meia volta volver", 
+                       "lutar ninja": "Lutar com o ninja",
+                       "conversar": "Conversar com o ninja"}
+        },
         "wii": {
-            "titulo": "wiiiiiiii",
-            "descricao": "Voce ganhou no MarioKark, porém DP garantida",
+            "titulo": "Mario Kart, baby",
+            "descricao": "Você escolheu jogar MarioKart Wii com os seus veteranos, mas sua DP foi garantida",
             "opcoes": {}
         },
         "pegar livro": {
             "titulo": "livro",
             "descricao": "livro",
-            "destino": "biblioteca"
-        
+            "destino": "biblioteca"       
         },
+        "conversar": {
+                "titulo": "Conversa",
+                "descricao": "Conversa afiada", 
+                "destino":"quarto andar"
+        },      
+        "lutar ninja": {
+                "titulo" : "Você escolheu lutar com o ninja da computação",
+                "descricao": "Ninja tem 3 de vida e pode tirar 5 das suas",
+                "destino": "405"
+        },        
         "tiazinha da biblio": {
             "titulo": "Você deve lutar contra a Tiazinha",
             "descricao": "Tiazinha tem 3 de vida e pode tirar 10 das suas",
@@ -87,8 +104,6 @@ def main():
         cenario_atual = cenarios[nome_cenario_atual]
         vidaP1 = 10
 
-        # Aluno A: substitua este comentário pelo código para imprimir 
-        # o cenário atual.
         print()
         print()
         print (cenario_atual["titulo"])
@@ -101,10 +116,6 @@ def main():
                 print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                 game_over = True
             else:
-    
-                
-                # Aluno B: substitua este comentário e a linha abaixo pelo código
-                # para pedir a escolha do usuário.
                 print()
                 print("Suas escolhas são: ")
                 for e, desc in opcoes.items():
@@ -125,7 +136,34 @@ def main():
                 print("Voce esta aprendendo, ganhou +10 de vida!")
                 vidaP1 = vidaP1 + 10
                 print ("Suas vidas: {0}".format(vidaP1))
-            
+            elif nome_cenario_atual == "conversar":
+                print ("Depois de uma longa discussão sobre arquivos JSON, você ganhou +15 de vida")
+                vidaP1 = vidaP1 + 15
+                print ("Suas vidas: {0}".format(vidaP1))
+            elif nome_cenario_atual == "lutar ninja":
+                 Pergunta = input("Voce quer atacar ou fugir?")
+                 if Pergunta == 'atacar':
+                    print("-----combate---")
+                    print("Vida ninja: 3")
+                    print("Sua Vida:{0}".format(vidaP1))
+                    vidaninja = 3
+                    ataqueP1 = random.randint(1,3)
+                    print()
+                    print("seu ataque foi: {0}" .format(ataqueP1))
+                    vidaninja = vidaninja - ataqueP1
+                    while vidaninja > 0:
+                        ataqueninja = 10
+                        vidaP1 = vidaP1 - ataqueninja
+                        if vidaP1 > 0:
+                            ataqueP1 = random.randint(1,3)
+                            print("seu ataque foi: {0}" .format(ataqueP1))
+                            vidaninja = vidaninja - ataqueP1
+                        elif vidaP1 == 0:
+                            print("Voce morreu!!")
+                            game_over = True
+                    else:
+                        break
+                
             elif nome_cenario_atual == "tiazinha da biblio":
                 Pergunta = input("Voce quer atacar ou fugir?")
                 
@@ -150,6 +188,7 @@ def main():
                             game_over = True
                     else:
                         break
+                    
                 
             print()
             nome_cenario_atual = cenario_atual["destino"]

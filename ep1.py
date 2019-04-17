@@ -7,8 +7,8 @@ import random
 def carregar_cenarios():
     cenarios = {
         "inicio": {
-            "titulo": "Saguao do perigo",
-            "descricao": "Voce esta no saguao de entrada do insper",
+            "titulo": "Saguão do perigo",
+            "descricao": "Você está no saguão de entrada do Insper",
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
                 "quarto andar": "Subir para o andar sagrado da engenharia",
@@ -19,7 +19,7 @@ def carregar_cenarios():
             "titulo": "Andar do desespero",
             "descricao": "Voce chegou ao andar da sala do seu professor",
             "opcoes": {
-                "inicio": "Tomar o elevador para o saguao de entrada",
+                "inicio": "Tomar o elevador para o saguão de entrada",
                 "professor": "Falar com o professor"
             }
         },
@@ -31,10 +31,10 @@ def carregar_cenarios():
             "opcoes": {}
         },
         "quarto andar": {
-            "titulo": "Andar da varzea",
+            "titulo": "Andar sagrado da Engenharia",
             "descricao": "Voce chegou ao quarto andar",
             "opcoes": {
-                "inicio": "Tomar o elevador para o saguao de entrada",
+                "inicio": "Tomar o elevador para o saguão de entrada",
                 "wii": "Jogar Wii",
                 "405": "Sala 405",
             }
@@ -71,6 +71,11 @@ def carregar_cenarios():
             "descricao": "Tiazinha tem 3 de vida e pode tirar 5 das suas",
             "destino": "biblioteca"
         },
+        "vida" : {"titulo" : "vidas",
+                  "descricao" : "estoque de vidas",
+                  "destino": "inicio"
+          
+        },       
         "biblioteca": {
             "titulo": "Caverna da tranquilidade",
             "descricao": "Voce esta na biblioteca",
@@ -100,9 +105,9 @@ def main():
     cenarios, nome_cenario_atual = carregar_cenarios()
 
     game_over = False
+    vidaP1 = 10
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
-        vidaP1 = 10
 
         print()
         print()
@@ -128,23 +133,26 @@ def main():
                 escolha = input("Para onde você deseja ir?: ")
                     
     
-                if escolha in opcoes:
+                if escolha in opcoes or escolha == "vida":
                     nome_cenario_atual = escolha
                 else:
                     print("Sua indecisão foi sua ruína!")
                     game_over = True
                     
         else:
+            #vida com livro
             if nome_cenario_atual == "pegar livro":
                 print("Voce esta aprendendo, ganhou +10 de vida!")
                 vidaP1 = vidaP1 + 10
                 print ("Suas vidas: {0}".format(vidaP1))
-            
+            #vida com conversa
+            elif nome_cenario_atual == "vida":
+                print ("Você possui {0} vidas".format(vidaP1))
             elif nome_cenario_atual == "conversar":
                 print ("Depois de uma longa discussão sobre arquivos JSON, você ganhou +15 de vida")
                 vidaP1 = vidaP1 + 15
                 print ("Suas vidas: {0}".format(vidaP1))
-            
+            #luta ninja
             elif nome_cenario_atual == "lutar ninja":
                  Pergunta = input("Voce quer atacar ou fugir?")
                  
@@ -172,12 +180,11 @@ def main():
                         elif vidaP1 == 0:
                                 print("Voce morreu!")
                                 game_over = True  
-                    if vidaninja <= 0:
-                        print("O ninja morreu")
-                        print("Voce venceu esse combate!!")
+                    print("O ninja morreu")
+                    print("Voce venceu esse combate!!")
                     print()
                     nome_cenario_atual = cenario_atual["destino"]
-                
+            # Luta tiazinha   
             elif nome_cenario_atual == "tiazinha da biblio":
                 Pergunta = input("Voce quer atacar ou fugir?")
                 
@@ -204,9 +211,8 @@ def main():
                         elif vidaP1 == 0:
                                 print("Voce morreu!")
                                 game_over = True                            
-                    if vidaTia <= 0:
-                        print("A tiazinha morreu")
-                        print("Voce venceu esse combate!!")
+                    print("A tiazinha morreu")
+                    print("Voce venceu esse combate!!")
                     print()
                     nome_cenario_atual = cenario_atual["destino"]
                     
@@ -215,6 +221,7 @@ def main():
             print()
             nome_cenario_atual = cenario_atual["destino"]
             
+
 
     print("Você morreu!!")
 

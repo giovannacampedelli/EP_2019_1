@@ -24,7 +24,8 @@ def carregar_cenarios():
             "descricao":"Você decidiu dar meia volta e sair do prédio novo. O que pretende fazer agora, jovem?",
             "opcoes": {
                 "sujos": "Ir para o bar da raposa como forma de escapar dos seus problemas",
-                "predio novo": "Testar sua sorte com um veterano de computacao"
+                "predio novo": "Testar sua sorte com um veterano de computacao",
+                "inicio": "voltar"
             } 
         },
         "andar professor": {
@@ -105,7 +106,34 @@ def carregar_cenarios():
                 "titulo": "Batalha Final",
                 "descricao": "é preciso ganhar esta batalha para conseguir enviar o EP e evitar que sua alma seja devorada",
                 "destino": "andar professor"
-            }    
+            },
+        "sujos":{
+            "titulo" : "Bar dos condenados", 
+            "descricao" : "Você nao demora muito para chegar ao bar dos condenados. Lá voce avista um jovem bebendo no canto.",
+            "opcoes": {
+                "jovem": "Falar com o jovem solitário",
+                "beber": "beber até um milagre acontecer",
+                "rua": "voltar"
+            }
+        },
+        "jovem": {
+            "titulo": "Jovem presidente",
+            "descricao": "Parabens! voce avistou o presidente do Diretório academico. O que será que ele tem a oferencer?",
+            "destino": "sujos"
+        },                            
+        "beber": {
+            "titulo": "Beber?",
+            "descricao": "Voce quer mesmo beber até um milagre acontecer?",
+            "opcoes": {
+                "beber mais": "Tem certeza?",
+                "sujos": "voltar para ir para um melhor caminho (recomendado)"
+            }
+        },
+        "beber mais": {
+                "titulo": "Milagre",
+                "descricao": " Parabens",
+                "destino": "sujos"
+            }
     }
         
     nome_cenario_atual = "inicio"
@@ -113,7 +141,6 @@ def carregar_cenarios():
 
 #lista inventário
     
-inventario = []
 
 
 
@@ -135,7 +162,8 @@ def main():
     ganhou = False
     vidaP1 = 10
     ataqueagilidade = 0
-    ataquelivrao = 0
+    ataquelivrao = 0 
+    inventario = []
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
 
@@ -184,6 +212,19 @@ def main():
                 print ("Depois de uma longa discussão sobre arquivos JSON, você ganhou +15 de vida")
                 vidaP1 = vidaP1 + 15
                 print ("Suas vidas: {0}".format(vidaP1))
+            #vida com  milagre
+            elif nome_cenario_atual == "beber mais": 
+                print ()
+                print ("Voce bebeu até receber um milagre. Ganhou mais 20 de vida")
+                vidaP1 += 20
+            #cores para a sala de teletransporte
+            elif nome_cenario_atual == "jovem":
+                print ()
+                print ("Depois de ser forcado a pagar uma cerveja para o seu veterano com 5 das duas vidas, ele te deu um papel misterioso contendo as seguintes informacoes:" )
+                print ()
+                print ("∆ rua:rosa \n∆ biblioteca: azul \n∆ predio novo: verde \n∆ quarto andar: vermelho \n∆ andar professor: preto" )
+                vidaP1 -= 5
+                
             #luta ninja
             elif nome_cenario_atual == "lutar ninja":
                  Pergunta = input("Voce quer atacar ou fugir?")
@@ -334,7 +375,6 @@ def main():
         print("Voce livrou o Insper de um monstro e ainda conseguiu adiar a entrega do EP para todos")
         print("Voce é o novo heroi")
     else:
-        print("Você morreu!!")
         print("GAME OVER")
 
 

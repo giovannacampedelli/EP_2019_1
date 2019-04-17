@@ -3,6 +3,9 @@
 # Alunos: 
 # - aluno A: Caroline Chaim, carolineclc@al.insper.edu.br
 # - aluno B: Giovanna Campedelli, giovannahc@al.insper.edu.br
+
+
+#dicionário de salas
 import random
 def carregar_cenarios():
     cenarios = {
@@ -12,8 +15,17 @@ def carregar_cenarios():
             "opcoes": {
                 "andar professor": "Tomar o elevador para o andar do professor",
                 "quarto andar": "Subir para o andar sagrado da engenharia",
-                "biblioteca": "Ir para a biblioteca"
+                "biblioteca": "Ir para a biblioteca",
+                "rua": "Dar meia volta e sair do prédio velho"
             }
+        },
+        "rua": {
+            "titulo": "Rua da Raposa. aka Quatá",
+            "descricao":"Você decidiu dar meia volta e sair do prédio novo. O que pretende fazer agora, jovem?",
+            "opcoes": {
+                "sujos": "Ir para o bar da raposa como forma de escapar dos seus problemas",
+                "predio novo": "Testar sua sorte com um veterano de computacao"
+            } 
         },
         "andar professor": {
             "titulo": "Andar do desespero",
@@ -89,6 +101,11 @@ def carregar_cenarios():
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
 
+#lista inventário
+    
+inventario = []
+
+
 
 def main():
     print("Na hora do sufoco!")
@@ -127,8 +144,9 @@ def main():
             else:
                 print()
                 print("Suas escolhas são: ")
+                print ()
                 for e, desc in opcoes.items():
-                    print("{0}: {1}".format(e, desc))
+                    print(" -> {0}: {1} \n".format(e, desc))
                 print()
                 escolha = input("Para onde você deseja ir?: ")
                     
@@ -145,9 +163,10 @@ def main():
                 print("Voce esta aprendendo, ganhou +10 de vida!")
                 vidaP1 = vidaP1 + 10
                 print ("Suas vidas: {0}".format(vidaP1))
-            #vida com conversa
+            #vida mostrador
             elif nome_cenario_atual == "vida":
                 print ("Você possui {0} vidas".format(vidaP1))
+            #vida com conversa
             elif nome_cenario_atual == "conversar":
                 print ("Depois de uma longa discussão sobre arquivos JSON, você ganhou +15 de vida")
                 vidaP1 = vidaP1 + 15
@@ -177,7 +196,7 @@ def main():
                             ataqueP1 = random.randint(1,2)
                             print("seu ataque foi: {0}" .format(ataqueP1))
                             vidaninja = vidaninja - ataqueP1   
-                        elif vidaP1 == 0:
+                        elif vidaP1 <= 0:
                                 print("Voce morreu!")
                                 game_over = True  
                     print("O ninja morreu")
@@ -199,7 +218,7 @@ def main():
                     vidaTia = vidaTia - ataqueP1
                     while vidaTia > 0:
                         print("Vida Tiazinha:{0}".format(vidaTia)) 
-                        ataqueTia = 5
+                        ataqueTia = 3
                         vidaP1 = vidaP1 - ataqueTia
                         print()
                         print("A tiazinha atacou")

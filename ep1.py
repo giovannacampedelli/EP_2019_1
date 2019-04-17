@@ -133,7 +133,21 @@ def carregar_cenarios():
                 "titulo": "Milagre",
                 "descricao": " Parabens",
                 "destino": "sujos"
+        },
+        "predio novo": { 
+                "titulo": "Melhor predio dos melhores predios",
+                "descricao": "Não demorou muito para voce chegar ao predio ideial. Aonde voce quer ir?",
+                "opcoes": {
+                    "garagem": "O que será que voce vai enconrar na garagem do predio novo?",
+                    "terceiro andar": "Encontrar com veteranos da computacao"
             }
+        },
+        "garagem": {
+                "titulo": "golem",
+                "descricao": "Voce deve lutar com o golem. O golem tem 10 de vida e tem um ataque de 10",
+                "destino": "predio novo"
+                
+        }               
     }
         
     nome_cenario_atual = "inicio"
@@ -224,6 +238,42 @@ def main():
                 print ()
                 print ("∆ rua:rosa \n∆ biblioteca: azul \n∆ predio novo: verde \n∆ quarto andar: vermelho \n∆ andar professor: preto" )
                 vidaP1 -= 5
+            #luta golem
+            elif nome_cenario_atual == "garagem":
+                 Pergunta = input("Voce quer atacar ou fugir?")
+                 
+                 if Pergunta == 'atacar':
+                    print ()
+                    print("-------combate-------")
+                    print("Vida golem: 3")
+                    print("Sua Vida:{0}".format(vidaP1))
+                    vidagolem = 10
+                    ataqueP1 = random.randint(1,3)
+                    print()
+                    print("seu ataque foi: {0}" .format(ataqueP1))
+                    vidagolem = vidagolem - ataqueP1
+                    while vidagolem>0:
+                        print("Vida Ninja:{0}".format(vidagolem))
+                        ataquegolem = 5
+                        print()
+                        print("O golem atacou")
+                        vidaP1 = vidaP1 - ataquegolem
+                        print("Sua Vida:{0}".format(vidaP1))
+                        if vidaP1 > 0:
+                            print()
+                            ataqueP1 = random.randint(1,2)
+                            print("seu ataque foi: {0}" .format(ataqueP1))
+                            vidagolem = vidagolem - ataqueP1   
+                        elif vidaP1 <= 0:
+                                print("Voce morreu!")
+                                game_over = True
+                    print()
+                    print("O golem morreu")
+                    print("Voce venceu esse combate!!")
+                    print ("voce ganhou uma chave misteriosa")
+                    inventario.append ("chave misteriosa")
+                    nome_cenario_atual = cenario_atual["destino"]
+                
                 
             #luta ninja
             elif nome_cenario_atual == "lutar ninja":

@@ -7,36 +7,40 @@ import random
 def carregar_cenarios():
     cenarios = {
         "inicio": {
-            "titulo": "Saguão do perigo",
-            "descricao": "Você está no saguão de entrada do Insper",
-            "opcoes": {
-                "andar professor": "Tomar o elevador para o andar do professor",
-                "quarto andar": "Subir para o andar sagrado da engenharia",
-                "biblioteca": "Ir para a biblioteca"
+                "titulo": "Saguão do perigo",
+                "descricao": "Você está no saguão de entrada do Insper",
+                "opcoes": {
+                    "andar professor": "Tomar o elevador para o andar do professor",
+                    "quarto andar": "Subir para o andar sagrado da engenharia",
+                    "biblioteca": "Ir para a biblioteca"
             }
         },
         "andar professor": {
             "titulo": "Andar do desespero",
             "descricao": "Voce chegou ao andar da sala do seu professor",
             "opcoes": {
-                "inicio": "Tomar o elevador para o saguão de entrada",
-                "professor": "Falar com o professor"
+                    "inicio": "Tomar o elevador para o saguão de entrada",
+                    "professor": "Falar com o professor"
             }
         },
         "professor": {
-            "titulo": "O monstro do Python",
-            "descricao": "Voce foi pedir para o professor adiar o EP. "
-                         "O professor revelou que é um monstro disfarçado "
-                         "e devorou sua alma.",
-            "opcoes": {}
+                "titulo": "O monstro do Python",
+                "descricao": "Voce foi pedir para o professor adiar o EP. "
+                             "O professor revelou que é um monstro disfarçado "
+                             "e quer devorar sua alma."
+                             
+                             "O professor tem 40 de vida e pode tirar 10 das suas",
+                "opcoes": {
+                        "luta professor": "Tente enfrentar o Professor e evitar pegar DP e ser devorado",
+            }
         },
         "quarto andar": {
             "titulo": "Andar sagrado da Engenharia",
             "descricao": "Voce chegou ao quarto andar",
             "opcoes": {
-                "inicio": "Tomar o elevador para o saguão de entrada",
-                "wii": "Jogar Wii",
-                "405": "Sala 405",
+                    "inicio": "Tomar o elevador para o saguão de entrada",
+                    "wii": "Jogar Wii",
+                    "405": "Sala 405",
             }
         },
         "405": {
@@ -44,7 +48,8 @@ def carregar_cenarios():
             "descricao": "Voce chegou à sala secreta de treinamentos. Um misterioso ninja appeared",
             "opcoes": {"quarto andar": "meia volta volver", 
                        "lutar ninja": "Lutar com o ninja",
-                       "conversar": "Conversar com o ninja"}
+                       "conversar": "Conversar com o ninja"
+            }
         },
         "wii": {
             "titulo": "Mario Kart, baby",
@@ -84,7 +89,12 @@ def carregar_cenarios():
                 "pegar livro": "Tentar estudar",
                 "tiazinha da biblio": "Voce fez muito barulho, enfrente a tiazinha"
             }
-        }
+        },
+        "luta professor": {
+                "titulo": "Batalha final",
+                "descricao": "É preciso ganhar esta batalha para conseguir enviar o EP e evitar que sua alma seja devorada",
+                "destino": "andar professor"
+            }
     }
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
@@ -182,6 +192,10 @@ def main():
                                 game_over = True  
                     print("O ninja morreu")
                     print("Voce venceu esse combate!!")
+                    print("Voce ganhou um ataque especial para quando entregar o EP: ")
+                    print("ataque de agilidadeeee")
+                    print("Este ataque consegue tirar 10 de vida do inimigo final")
+                    ataqueagilidade=True
                     print()
                     nome_cenario_atual = cenario_atual["destino"]
             # Luta tiazinha   
@@ -213,8 +227,110 @@ def main():
                                 game_over = True                            
                     print("A tiazinha morreu")
                     print("Voce venceu esse combate!!")
+                    print("Voce ganhou um ataque especial para quando entregar o EP: ")
+                    print("ataque do livraaaao")
+                    print("Este ataque consegue tirar 15 de vida do inimigo final")
+                    ataquelivrao = True
+                    
                     print()
                     nome_cenario_atual = cenario_atual["destino"]
+                #Luta professor
+                elif nome_cenario_atual == "luta professor":
+                    print("-------batalha final-------")
+                    print("Vida professor: 40")
+                    print("Sua Vida:{0}".format(vidaP1))
+                    vidaprofessor = 40
+                    if ataqueagilidade == True:
+                        if ataquelivrao == True:
+                            qual_ataque = input("deseja atacar com livrao ou agilidade?  ")
+                            if qual_ataque == 'aligidade':
+                                ataqueP1 = 10
+                                print("seu ataque foi: {0}" .format(ataqueP1))
+                                vidaprofessor = vidaprofessor - ataqueP1
+                            if qual_ataque == 'livrao':
+                                ataqueP1 = 15
+                                print("seu ataque foi: {0}" .format(ataqueP1))
+                                vidaprofessor = vidaprofessor - ataqueP1
+                        else:
+                            print("Voce pode atacar com agilidade")
+                            ataqueP1 = 10
+                            print("seu ataque foi: {0}" .format(ataqueP1))
+                            vidaprofessor = vidaprofessor - ataqueP1
+                    if ataquelivrao == True:
+                        if ataqueagilidade == True:
+                            qual_ataque = input("deseja atacar com livrao ou agilidade?  ")
+                            if qual_ataque == 'aligidade':
+                                ataqueP1 = 10
+                                print("seu ataque foi: {0}" .format(ataqueP1))
+                                vidaprofessor = vidaprofessor - ataqueP1
+                            if qual_ataque == 'livrao':
+                                ataqueP1 = 15
+                                print("seu ataque foi: {0}" .format(ataqueP1))
+                                vidaprofessor = vidaprofessor - ataqueP1
+                        else:
+                            print("Voce pode atacar com o livrao")
+                            ataqueP1 = 15
+                            print("seu ataque foi: {0}" .format(ataqueP1))
+                            vidaprofessor = vidaprofessor - ataqueP1
+                    else:
+                        ataqueP1 = 5
+                        print("seu ataque foi: {0}" .format(ataqueP1))
+                        vidaprofessor = vidaprofessor - ataqueP1
+                    while vidaprofessor > 0:
+                        print("Vida Professor:{0}".format(vidaprofessor)) 
+                        ataqueprofessor = 10
+                        vidaP1 = vidaP1 - ataqueprofessor
+                        print()
+                        print("Professor atacou")
+                        print("Sua Vida:{0}".format(vidaP1))
+                        if vidaP1 > 0:
+                            if ataqueagilidade == True:
+                                if ataquelivrao == True:
+                                    qual_ataque = input("deseja atacar com livrao ou agilidade?  ")
+                                    if qual_ataque == 'aligidade':
+                                        ataqueP1 = 10
+                                        print("seu ataque foi: {0}" .format(ataqueP1))
+                                        vidaprofessor = vidaprofessor- ataqueP1
+                                    if qual_ataque == 'livrao':
+                                        ataqueP1 = 15
+                                        print("seu ataque foi: {0}" .format(ataqueP1))
+                                        vidaprofessor = vidaprofessor - ataqueP1
+                                else:
+                                    print("Voce pode atacar com agilidade")
+                                    ataqueP1 = 10
+                                    print("seu ataque foi: {0}" .format(ataqueP1))
+                                    vidaprofessor = vidaprofessor - ataqueP1
+                            if ataquelivrao == True:
+                                if ataqueagilidade == True:
+                                    qual_ataque = input("deseja atacar com livrao ou agilidade?  ")
+                                    if qual_ataque == 'aligidade':
+                                        ataqueP1 = 10
+                                        print("seu ataque foi: {0}" .format(ataqueP1))
+                                        vidaprofessor = vidaprofessor - ataqueP1
+                                    if qual_ataque == 'livrao':
+                                        ataqueP1 = 15
+                                        print("seu ataque foi: {0}" .format(ataqueP1))
+                                        vidaprofessor = vidaprofessor - ataqueP1
+                                else:
+                                    print("Voce pode atacar com o livrao")
+                                    ataqueP1 = 15
+                                    print("seu ataque foi: {0}" .format(ataqueP1))
+                                    vidaprofessor = vidaprofessor - ataqueP1 
+                            else:
+                                ataqueP1 = 5
+                                print("seu ataque foi: {0}" .format(ataqueP1))
+                                vidaprofessor = vidaprofessor - ataqueP1
+                           
+                        elif vidaP1 == 0:
+                                print("Voce morreu!")
+                                game_over = True                            
+                    print("O professor morreu")
+                    print("VOCÊ VENCEU A BATALHA FINAL")
+                    print("Voce livrou o Insper de um monstro e ainda conseguiu adiar a entrega do EP para todos")
+                    print("Voce é o novo heroi")
+                    game_over = True
+                                   
+                    
                     
                     
                 

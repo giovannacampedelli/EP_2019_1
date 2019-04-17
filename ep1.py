@@ -53,7 +53,7 @@ def carregar_cenarios():
         },
         "pegar livro": {
             "titulo": "livro",
-            "descricao": "livro",
+            "descricao": "Pegou o livro de Python",
             "destino": "biblioteca"       
         },
         "conversar": {
@@ -68,7 +68,7 @@ def carregar_cenarios():
         },        
         "tiazinha da biblio": {
             "titulo": "Você deve lutar contra a Tiazinha",
-            "descricao": "Tiazinha tem 3 de vida e pode tirar 10 das suas",
+            "descricao": "Tiazinha tem 3 de vida e pode tirar 5 das suas",
             "destino": "biblioteca"
         },
         "biblioteca": {
@@ -76,7 +76,7 @@ def carregar_cenarios():
             "descricao": "Voce esta na biblioteca",
             "opcoes": {
                 "inicio": "Voltar para o saguao de entrada",
-                "pegar livro": "Tentar estudar,pegar livro sobre Python",
+                "pegar livro": "Tentar estudar",
                 "tiazinha da biblio": "Voce fez muito barulho, enfrente a tiazinha"
             }
         }
@@ -110,11 +110,15 @@ def main():
         print ("-" * len(cenario_atual["titulo"]))
         print (cenario_atual["descricao"])
 
+
+
         if "opcoes" in cenario_atual:
             opcoes = cenario_atual['opcoes']
+            
             if len(opcoes) == 0:
                 print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                 game_over = True
+            
             else:
                 print()
                 print("Suas escolhas são: ")
@@ -124,70 +128,88 @@ def main():
                 escolha = input("Para onde você deseja ir?: ")
                     
     
-    
-    
                 if escolha in opcoes:
                     nome_cenario_atual = escolha
                 else:
                     print("Sua indecisão foi sua ruína!")
                     game_over = True
+                    
         else:
             if nome_cenario_atual == "pegar livro":
                 print("Voce esta aprendendo, ganhou +10 de vida!")
                 vidaP1 = vidaP1 + 10
                 print ("Suas vidas: {0}".format(vidaP1))
+            
             elif nome_cenario_atual == "conversar":
                 print ("Depois de uma longa discussão sobre arquivos JSON, você ganhou +15 de vida")
                 vidaP1 = vidaP1 + 15
                 print ("Suas vidas: {0}".format(vidaP1))
+            
             elif nome_cenario_atual == "lutar ninja":
                  Pergunta = input("Voce quer atacar ou fugir?")
+                 
                  if Pergunta == 'atacar':
-                    print("-----combate---")
+                    print("-------combate-------")
                     print("Vida ninja: 3")
                     print("Sua Vida:{0}".format(vidaP1))
                     vidaninja = 3
-                    ataqueP1 = random.randint(1,3)
+                    ataqueP1 = random.randint(1,2)
                     print()
                     print("seu ataque foi: {0}" .format(ataqueP1))
                     vidaninja = vidaninja - ataqueP1
-                    while vidaninja > 0:
-                        ataqueninja = 10
+                    while vidaninja>0:
+                        print("Vida Ninja:{0}".format(vidaninja))
+                        ataqueninja = 5
+                        print()
+                        print("O ninja atacou")
                         vidaP1 = vidaP1 - ataqueninja
+                        print("Sua Vida:{0}".format(vidaP1))
                         if vidaP1 > 0:
-                            ataqueP1 = random.randint(1,3)
+                            print()
+                            ataqueP1 = random.randint(1,2)
                             print("seu ataque foi: {0}" .format(ataqueP1))
-                            vidaninja = vidaninja - ataqueP1
+                            vidaninja = vidaninja - ataqueP1   
                         elif vidaP1 == 0:
-                            print("Voce morreu!!")
-                            game_over = True
-                    else:
-                        break
+                                print("Voce morreu!")
+                                game_over = True  
+                    if vidaninja <= 0:
+                        print("O ninja morreu")
+                        print("Voce venceu esse combate!!")
+                    print()
+                    nome_cenario_atual = cenario_atual["destino"]
                 
             elif nome_cenario_atual == "tiazinha da biblio":
                 Pergunta = input("Voce quer atacar ou fugir?")
                 
                 if Pergunta == 'atacar':
-                    print("-----combate---")
+                    print("-------combate-------")
                     print("Vida tiazinha: 3")
                     print("Sua Vida:{0}".format(vidaP1))
                     vidaTia = 3
-                    ataqueP1 = random.randint(1,3)
+                    ataqueP1 = random.randint(1,2)
                     print()
                     print("seu ataque foi: {0}" .format(ataqueP1))
                     vidaTia = vidaTia - ataqueP1
                     while vidaTia > 0:
-                        ataqueTia = 10
+                        print("Vida Tiazinha:{0}".format(vidaTia)) 
+                        ataqueTia = 5
                         vidaP1 = vidaP1 - ataqueTia
+                        print()
+                        print("A tiazinha atacou")
+                        print("Sua Vida:{0}".format(vidaP1))
                         if vidaP1 > 0:
-                            ataqueP1 = random.randint(1,3)
+                            ataqueP1 = random.randint(1,2)
                             print("seu ataque foi: {0}" .format(ataqueP1))
-                            vidaTia = vidaTia - ataqueP1
+                            vidaTia = vidaTia - ataqueP1 
                         elif vidaP1 == 0:
-                            print("Voce morreu!!")
-                            game_over = True
-                    else:
-                        break
+                                print("Voce morreu!")
+                                game_over = True                            
+                    if vidaTia <= 0:
+                        print("A tiazinha morreu")
+                        print("Voce venceu esse combate!!")
+                    print()
+                    nome_cenario_atual = cenario_atual["destino"]
+                    
                     
                 
             print()

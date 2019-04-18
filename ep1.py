@@ -30,7 +30,7 @@ def carregar_cenarios():
         },
         "andar professor": {
             "titulo": "Andar do desespero",
-            "descricao": "Voce chegou ao andar da sala do seu professor",
+            "descricao": "Você chegou ao andar da sala do seu professor",
             "opcoes": {
                 "inicio": "Tomar o elevador para o saguão de entrada",
                 "professor": "Falar com o professor"
@@ -38,12 +38,13 @@ def carregar_cenarios():
         },
         "professor": {
             "titulo": "O monstro do Python",
-            "descricao": "Voce foi pedir para o professor adiar o EP. "
+            "descricao": "Você foi pedir para o professor adiar o EP. "
                          "O professor revelou que é um monstro disfarçado "
                          "e quer dedvorar sua alma."
                          "O professor tem 40 de vida e pode tirar 10 das suas",
             "opcoes":{
                         "luta professor": "Tente enfrentar o Professor e evitar pegar DP e ser devorado",
+                        "professor": "fugir"
             }
         },
         "quarto andar": {
@@ -178,18 +179,9 @@ def carregar_cenarios():
         },
         "teletransporte": {
                 "titulo": "Sala de teletransporte",
-                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso as seguintes salas abaixo CONTANTO que saiba sua cor específica. ",
+                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso a TODAS as salas contando que voce saiba o nome delas!. ",
                 "opcoes": {
-                        "inicio": "volte para o sagao do predio 1",
-                        "rua": "volte para rua da Raposa",
-                        "biblioteca": "va para a canverna da tranquilidade",
-                        "andar professor": "tente encarar o desafio final",
-                        "quarto andar": "va apara o anadr da engenharia",
-                        "sujos": "va encher a cara",
-                        "predio novo": "volte para o sagao do predio novo",
-                        "garagem": "volte para e lute de novo",
-                        "terceiro andar": "volte para o andar das tecnologias",
-                        "segundo andar": "de meia volta"
+                        "?????": "??????????"
             }
         }
                  
@@ -240,6 +232,15 @@ def main():
             if len(opcoes) == 0:
                 print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                 game_over = True
+            elif nome_cenario_atual == "teletransporte":
+                print()
+                print("Suas escolhas são: ")
+                print ()
+                for e, desc in opcoes.items():
+                    print(" -> {0}: {1} \n".format(e, desc))
+                print()
+                escolha = input("Para onde você deseja ir?: ")
+                nome_cenario_atual = escolha
             
             else:
                 print()
@@ -276,7 +277,7 @@ def main():
                 print ()
                 print ("Voce bebeu até receber um milagre. Ganhou mais 20 de vida")
                 vidaP1 += 20
-            #cores para a sala de teletransporte
+            #dica jovem
             elif nome_cenario_atual == "jovem":
                 Pergunta = input("Voce quer pagar uma cerveja para seu veterano?")
                 if Pergunta == "sim":
@@ -497,8 +498,10 @@ def main():
 
     if ganhou == True:
         print("Voce livrou o Insper de um monstro e ainda conseguiu adiar a entrega do EP para todos")
+        print ()
         print("Voce é o novo heroi")
     else:
+        print ()
         print("GAME OVER")
 
 

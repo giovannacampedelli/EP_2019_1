@@ -25,7 +25,7 @@ def carregar_cenarios():
             "opcoes": {
                 "sujos": "Ir para o bar da raposa como forma de escapar dos seus problemas",
                 "predio novo": "Testar sua sorte com um veterano de computacao",
-                "inicio": "voltar"
+                "inicio": "voltar para o saogao do predio 1"
             } 
         },
         "andar professor": {
@@ -131,7 +131,7 @@ def carregar_cenarios():
         },
         "beber mais": {
                 "titulo": "Milagre",
-                "descricao": " Parabens",
+                "descricao": "Parabens",
                 "destino": "sujos"
         },
         "predio novo": { 
@@ -278,11 +278,17 @@ def main():
                 vidaP1 += 20
             #cores para a sala de teletransporte
             elif nome_cenario_atual == "jovem":
-                print ()
-                print ("Depois de ser forcado a pagar uma cerveja para o seu veterano com 5 das duas vidas, ele te deu um papel misterioso contendo dicas para o EP:" )
-                print ()
-                print ("Converse com alguem no quarto andar e ganhe a luta contra o ninja; e tera mais chances quando for falar com o professor ")
-                vidaP1 -= 5
+                Pergunta = input("Voce quer pagar uma cerveja para seu veterano?")
+                if Pergunta == "sim":
+                    print ()
+                    print ("Depois de ter pagado cerveja para o seu veterano com 5 das duas vidas, ele te deu um papel misterioso contendo dicas para o EP:" )
+                    print ()
+                    print ("Converse com alguem no quarto andar e ganhe a luta contra o ninja; e tera mais chances quando for falar com o professor ")
+                    vidaP1 -= 5
+                else:
+                     print()
+                     nome_cenario_atual = cenario_atual["destino"]
+                    
             #sala terceiro andar
             elif nome_cenario_atual == "sala virtual":
                 if "chave misteriosa" in inventario:

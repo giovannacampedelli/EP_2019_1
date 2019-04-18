@@ -21,7 +21,7 @@ def carregar_cenarios():
         },
         "rua": {
             "titulo": "Rua da Raposa. aka Quatá",
-            "descricao":"Você decidiu dar meia volta e sair do prédio novo. O que pretende fazer agora, jovem?",
+            "descricao":"Você decidiu dar meia volta e sair do prédio. O que pretende fazer agora, jovem?",
             "opcoes": {
                 "sujos": "Ir para o bar da raposa como forma de escapar dos seus problemas",
                 "predio novo": "Testar sua sorte com um veterano de computacao",
@@ -136,7 +136,7 @@ def carregar_cenarios():
         },
         "predio novo": { 
                 "titulo": "Melhor predio dos melhores predios",
-                "descricao": "Não demorou muito para voce chegar ao predio ideial. Aonde voce quer ir?",
+                "descricao": "Não demorou muito para voce chegar ao predio ideal. Aonde voce quer ir?",
                 "opcoes": {
                     "garagem": "O que será que voce vai enconrar na garagem do predio novo?",
                     "terceiro andar": "Encontrar com veteranos da computacao",
@@ -174,12 +174,24 @@ def carregar_cenarios():
         "213":{
             "titulo": "Sala misteriosa 213",
             "descricao" : "Será que voce possui a chave para a sala 213?",
-            "destino": "segundo andar"
+            "destino": "teletransporte"
         },
         "teletransporte": {
                 "titulo": "Sala de teletransporte",
-                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso as seguintes salas abaixo CONTANTO que saiba sua cor específica. \n rua \n biblioteca \n predio novo \n quarto andar \n andar profressor",
-                "destino" : ""}
+                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso as seguintes salas abaixo CONTANTO que saiba sua cor específica. ",
+                "opcoes": {
+                        "inicio": "volte para o sagao do predio 1",
+                        "rua": "volte para rua da Raposa",
+                        "biblioteca": "va para a canverna da tranquilidade",
+                        "andar professor": "tente encarar o desafio final",
+                        "quarto andar": "va apara o anadr da engenharia",
+                        "sujos": "va encher a cara",
+                        "predio novo": "volte para o sagao do predio novo",
+                        "garagem": "volte para e lute de novo",
+                        "terceiro andar": "volte para o andar das tecnologias",
+                        "segundo andar": "de meia volta"
+            }
+        }
                  
     }
         
@@ -267,9 +279,9 @@ def main():
             #cores para a sala de teletransporte
             elif nome_cenario_atual == "jovem":
                 print ()
-                print ("Depois de ser forcado a pagar uma cerveja para o seu veterano com 5 das duas vidas, ele te deu um papel misterioso contendo as seguintes informacoes:" )
+                print ("Depois de ser forcado a pagar uma cerveja para o seu veterano com 5 das duas vidas, ele te deu um papel misterioso contendo dicas para o EP:" )
                 print ()
-                print ("∆ rua:rosa \n∆ biblioteca: azul \n∆ predio novo: verde \n∆ quarto andar: vermelho \n∆ andar professor: preto" )
+                print ("Converse com alguem no quarto andar e ganhe a luta contra o ninja; e tera mais chances quando for falar com o professor ")
                 vidaP1 -= 5
             #sala terceiro andar
             elif nome_cenario_atual == "sala virtual":
@@ -284,17 +296,12 @@ def main():
             elif nome_cenario_atual == "213":
                 if "chave segundo andar"in inventario:
                     print ()
-                    print ("Parabens! Voce tem acesso à sala de teletransporte, escreva teletransporte no local onde deseja ir")
+                    print ("Parabens! Voce tem acesso à sala de teletransporte")
+                    print ("Sempre que digitar: teletransporte, consiguira escolher seu destino")
+                    nome_cenario_atual = cenario_atual["destino"]
                 else:
                     print ()
                     print ("Voce nao tem acesso a essa sala. Tente pegar uma chave")
-            #teletransporte
-            elif nome_cenario_atual == "teletransporte":
-                cenario_atual["destino "]= input ("escolha o seu destino: ")
-                cor = input ("Escolha a cor correta: ")
-                if cenario_atual["destino"] == "rua":
-                    if cor != "rosa":
-                        game_over = True
                     
                 
             #luta golem
@@ -413,9 +420,9 @@ def main():
             #Luta professor
             elif nome_cenario_atual == "luta professor":
                 print("-------batalha final-------")
-                print("Vida professor: 40")
+                print("Vida professor: 60")
                 print("Sua Vida:{0}".format(vidaP1))
-                vidaprofessor = 40
+                vidaprofessor = 60
                 while vidaprofessor > 0:
                     if vidaP1 > 0:
                         if ataqueagilidade == 10:

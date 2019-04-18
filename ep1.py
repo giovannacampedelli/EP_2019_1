@@ -139,15 +139,48 @@ def carregar_cenarios():
                 "descricao": "Não demorou muito para voce chegar ao predio ideial. Aonde voce quer ir?",
                 "opcoes": {
                     "garagem": "O que será que voce vai enconrar na garagem do predio novo?",
-                    "terceiro andar": "Encontrar com veteranos da computacao"
+                    "terceiro andar": "Encontrar com veteranos da computacao",
+                    "rua": "voltar"
             }
         },
         "garagem": {
                 "titulo": "golem",
                 "descricao": "Voce deve lutar com o golem. O golem tem 10 de vida e tem um ataque de 10",
-                "destino": "predio novo"
-                
-        }               
+                "destino": "predio novo"                
+        },
+        "terceiro andar" : {
+                "titulo" : "andar tech",
+                "descricao": "Aqui você vê a sala de realidade virtual. Será que voce vai enconrar sua salvação?",
+                "opcoes": {
+                        "sala virtual": "Sala onde o grande veterano hiberna",
+                        "segundo andar": "Descer para o segundo andar",
+                        "predio novo": "voltar para a entrada"
+            }
+        },
+        "sala virtual":{
+                "titulo": "Caverna misteriosa",
+                "descricao": "Será que voce possui a chave para destrancar a sala?",
+                "destino": "terceiro andar"
+        },
+        "segundo andar" : {
+                "titulo" : " Andar dos Bixos",
+                "descricao" : "Apesar do andar dos bixos nao conter nada alem de salas de estudo individuais, será que há algo escondido nas profundezas da dala 213?",
+                "opcoes" : {
+                        "213": "Tentar sua sorte na sala 213",
+                        "terceiro andar": "Já falou com o veterano?",
+                        "predio novo": "desca pelo tobogã!"
+            }
+        },
+        "213":{
+            "titulo": "Sala misteriosa 213",
+            "descricao" : "Será que voce possui a chave para a sala 213?",
+            "destino": "segundo andar"
+        },
+        "teletransporte": {
+                "titulo": "Sala de teletransporte",
+                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso as seguintes salas abaixo CONTANTO que saiba sua cor específica. \n rua \n biblioteca \n predio novo \n quarto andar \n andar profressor",
+                "destino" : ""}
+                 
     }
         
     nome_cenario_atual = "inicio"
@@ -206,7 +239,7 @@ def main():
                 escolha = input("Para onde você deseja ir?: ")
                     
     
-                if escolha in opcoes or escolha == "vida":
+                if escolha in opcoes or escolha == "vida" or escolha == "teletransporte":
                     nome_cenario_atual = escolha
                 else:
                     print("Sua indecisão foi sua ruína!")
@@ -238,6 +271,32 @@ def main():
                 print ()
                 print ("∆ rua:rosa \n∆ biblioteca: azul \n∆ predio novo: verde \n∆ quarto andar: vermelho \n∆ andar professor: preto" )
                 vidaP1 -= 5
+            #sala terceiro andar
+            elif nome_cenario_atual == "sala virtual":
+                if "chave misteriosa" in inventario:
+                    print ()
+                    print ("Seu veterano, ao inves de te atacar, sentiu pena do seu desespero e resolveu te dar a chave da sala 213. Use-a com cuidado")
+                    inventario.append ("chave segundo andar")
+                else: 
+                    print ()
+                    print ("Oh não! Essa sala esta bloqueada! Tente achar a chave que abra essa porta")
+            #sala segundo andar
+            elif nome_cenario_atual == "213":
+                if "chave segundo andar"in inventario:
+                    print ()
+                    print ("Parabens! Voce tem acesso à sala de teletransporte, escreva teletransporte no local onde deseja ir")
+                else:
+                    print ()
+                    print ("Voce nao tem acesso a essa sala. Tente pegar uma chave")
+            #teletransporte
+            elif nome_cenario_atual == "teletransporte":
+                cenario_atual["destino "]= input ("escolha o seu destino: ")
+                cor = input ("Escolha a cor correta: ")
+                if cenario_atual["destino"] == "rua":
+                    if cor != "rosa":
+                        game_over = True
+                    
+                
             #luta golem
             elif nome_cenario_atual == "garagem":
                  Pergunta = input("Voce quer atacar ou fugir?")
@@ -247,13 +306,13 @@ def main():
                     print("-------combate-------")
                     print("Vida golem: 3")
                     print("Sua Vida:{0}".format(vidaP1))
-                    vidagolem = 10
+                    vidagolem = 3
                     ataqueP1 = random.randint(1,3)
                     print()
                     print("seu ataque foi: {0}" .format(ataqueP1))
                     vidagolem = vidagolem - ataqueP1
-                    while vidagolem>0:
-                        print("Vida Ninja:{0}".format(vidagolem))
+                    while vidagolem>0 and game_over == False:
+                        print("Vida Golem:{0}".format(vidagolem))
                         ataquegolem = 5
                         print()
                         print("O golem atacou")
@@ -264,15 +323,16 @@ def main():
                             ataqueP1 = random.randint(1,2)
                             print("seu ataque foi: {0}" .format(ataqueP1))
                             vidagolem = vidagolem - ataqueP1   
-                        elif vidaP1 <= 0:
+                        elif vidaP1 <= 0 or vidaP1 == 0:
                                 print("Voce morreu!")
                                 game_over = True
-                    print()
-                    print("O golem morreu")
-                    print("Voce venceu esse combate!!")
-                    print ("voce ganhou uma chave misteriosa")
-                    inventario.append ("chave misteriosa")
-                    nome_cenario_atual = cenario_atual["destino"]
+                    if vidagolem <= 0:             
+                        print()
+                        print("O golem morreu")
+                        print("Voce venceu esse combate!!")
+                        print ("voce ganhou uma chave misteriosa")
+                        inventario.append ("chave misteriosa")
+                        nome_cenario_atual = cenario_atual["destino"]
                 
                 
             #luta ninja
@@ -288,7 +348,7 @@ def main():
                     print()
                     print("seu ataque foi: {0}" .format(ataqueP1))
                     vidaninja = vidaninja - ataqueP1
-                    while vidaninja>0:
+                    while vidaninja > 0 and game_over == False:
                         print("Vida Ninja:{0}".format(vidaninja))
                         ataqueninja = 5
                         print()
@@ -300,18 +360,19 @@ def main():
                             ataqueP1 = random.randint(1,2)
                             print("seu ataque foi: {0}" .format(ataqueP1))
                             vidaninja = vidaninja - ataqueP1   
-                        elif vidaP1 <= 0:
+                        elif vidaP1 == 0 or vidaP1<=0:
                                 print("Voce morreu!")
                                 game_over = True
-                    print()
-                    print("O ninja morreu")
-                    print("Voce venceu esse combate!!")
-                    print("Voce ganhou um ataque especial para quando for entregar o EP: ")
-                    print("ataque agilidadeeee")
-                    print("Esse ataque consegue tirar 10 de vida do inimigo final")
-                    ataqueagilidade = 10
-                    print()
-                    nome_cenario_atual = cenario_atual["destino"]
+                    if vidaninja <= 0:            
+                        print()
+                        print("O ninja morreu")
+                        print("Voce venceu esse combate!!")
+                        print("Voce ganhou um ataque especial para quando for entregar o EP: ")
+                        print("ataque agilidadeeee")
+                        print("Esse ataque consegue tirar 10 de vida do inimigo final")
+                        ataqueagilidade = 10
+                        print()
+                        nome_cenario_atual = cenario_atual["destino"]
             # Luta tiazinha   
             elif nome_cenario_atual == "tiazinha da biblio":
                 Pergunta = input("Voce quer atacar ou fugir?")

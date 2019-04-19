@@ -7,195 +7,20 @@
 
 #dicionário de salas
 import random
-def carregar_cenarios():
-    cenarios = {
-        "inicio": {
-            "titulo": "Saguão do perigo",
-            "descricao": "Você está no saguão de entrada do Insper",
-            "opcoes": {
-                "andar professor": "Tomar o elevador para o andar do professor",
-                "quarto andar": "Subir para o andar sagrado da engenharia",
-                "biblioteca": "Ir para a biblioteca",
-                "rua": "Dar meia volta e sair do prédio velho"
-            }
-        },
-        "rua": {
-            "titulo": "Rua da Raposa. aka Quatá",
-            "descricao":"Você decidiu dar meia volta e sair do prédio. O que pretende fazer agora, jovem?",
-            "opcoes": {
-                "sujos": "Ir para o bar da raposa como forma de escapar dos seus problemas",
-                "predio novo": "Testar sua sorte com um veterano de computacao",
-                "inicio": "voltar para o saogao do predio 1"
-            } 
-        },
-        "andar professor": {
-            "titulo": "Andar do desespero",
-            "descricao": "Você chegou ao andar da sala do seu professor",
-            "opcoes": {
-                "inicio": "Tomar o elevador para o saguão de entrada",
-                "professor": "Falar com o professor"
-            }
-        },
-        "professor": {
-            "titulo": "O monstro do Python",
-            "descricao": "Você foi pedir para o professor adiar o EP. "
-                         "O professor revelou que é um monstro disfarçado "
-                         "e quer dedvorar sua alma."
-                         "O professor tem 40 de vida e pode tirar 10 das suas",
-            "opcoes":{
-                        "luta professor": "Tente enfrentar o Professor e evitar pegar DP e ser devorado",
-                        "professor": "fugir"
-            }
-        },
-        "quarto andar": {
-            "titulo": "Andar sagrado da Engenharia",
-            "descricao": "Voce chegou ao quarto andar",
-            "opcoes": {
-                "inicio": "Tomar o elevador para o saguão de entrada",
-                "wii": "Jogar Wii",
-                "405": "Sala 405",
-            }
-        },
-        "405": {
-            "titulo": "sala 405",
-            "descricao": "Voce chegou à sala secreta de treinamentos. Um misterioso ninja appeared",
-            "opcoes": {"quarto andar": "meia volta volver", 
-                       "lutar ninja": "Lutar com o ninja",
-                       "conversar": "Conversar com o ninja"
-            }
-        },
-        "wii": {
-            "titulo": "Mario Kart, baby",
-            "descricao": "Você escolheu jogar MarioKart Wii com os seus veteranos, mas sua DP foi garantida",
-            "opcoes": {}
-        },
-        "pegar livro": {
-            "titulo": "livro",
-            "descricao": "Pegou o livro de Python",
-            "destino": "biblioteca"       
-        },
-        "conversar": {
-                "titulo": "Conversa",
-                "descricao": "Conversa afiada", 
-                "destino":"quarto andar"
-        },      
-        "lutar ninja": {
-                "titulo" : "Você escolheu lutar com o ninja da computação",
-                "descricao": "Ninja tem 3 de vida e pode tirar 5 das suas",
-                "destino": "405"
-        },        
-        "tiazinha da biblio": {
-            "titulo": "Você deve lutar contra a Tiazinha",
-            "descricao": "Tiazinha tem 3 de vida e pode tirar 5 das suas",
-            "destino": "biblioteca"
-        },
-        "vida" : {"titulo" : "vidas",
-                  "descricao" : "estoque de vidas",
-                  "destino": "inicio"
-          
-        },       
-        "biblioteca": {
-            "titulo": "Caverna da tranquilidade",
-            "descricao": "Voce esta na biblioteca",
-            "opcoes": {
-                "inicio": "Voltar para o saguao de entrada",
-                "pegar livro": "Tentar estudar",
-                "tiazinha da biblio": "Voce fez muito barulho, enfrente a tiazinha"
-            }
-        },
-        "luta professor": {
-                "titulo": "Batalha Final",
-                "descricao": "é preciso ganhar esta batalha para conseguir enviar o EP e evitar que sua alma seja devorada",
-                "destino": "andar professor"
-            },
-        "sujos":{
-            "titulo" : "Bar dos condenados", 
-            "descricao" : "Você nao demora muito para chegar ao bar dos condenados. Lá voce avista um jovem bebendo no canto.",
-            "opcoes": {
-                "jovem": "Falar com o jovem solitário",
-                "beber": "beber até um milagre acontecer",
-                "rua": "voltar"
-            }
-        },
-        "jovem": {
-            "titulo": "Jovem presidente",
-            "descricao": "Parabens! voce avistou o presidente do Diretório academico. O que será que ele tem a oferencer?",
-            "destino": "sujos"
-        },                            
-        "beber": {
-            "titulo": "Beber?",
-            "descricao": "Voce quer mesmo beber até um milagre acontecer?",
-            "opcoes": {
-                "beber mais": "Tem certeza?",
-                "sujos": "voltar para ir para um melhor caminho (recomendado)"
-            }
-        },
-        "beber mais": {
-                "titulo": "Milagre",
-                "descricao": "Parabens",
-                "destino": "sujos"
-        },
-        "predio novo": { 
-                "titulo": "Melhor predio dos melhores predios",
-                "descricao": "Não demorou muito para voce chegar ao predio ideal. Aonde voce quer ir?",
-                "opcoes": {
-                    "garagem": "O que será que voce vai enconrar na garagem do predio novo?",
-                    "terceiro andar": "Encontrar com veteranos da computacao",
-                    "rua": "voltar"
-            }
-        },
-        "garagem": {
-                "titulo": "golem",
-                "descricao": "Voce deve lutar com o golem. O golem tem 10 de vida e tem um ataque de 10",
-                "destino": "predio novo"                
-        },
-        "terceiro andar" : {
-                "titulo" : "andar tech",
-                "descricao": "Aqui você vê a sala de realidade virtual. Será que voce vai enconrar sua salvação?",
-                "opcoes": {
-                        "sala virtual": "Sala onde o grande veterano hiberna",
-                        "segundo andar": "Descer para o segundo andar",
-                        "predio novo": "voltar para a entrada"
-            }
-        },
-        "sala virtual":{
-                "titulo": "Caverna misteriosa",
-                "descricao": "Será que voce possui a chave para destrancar a sala?",
-                "destino": "terceiro andar"
-        },
-        "segundo andar" : {
-                "titulo" : " Andar dos Bixos",
-                "descricao" : "Apesar do andar dos bixos nao conter nada alem de salas de estudo individuais, será que há algo escondido nas profundezas da dala 213?",
-                "opcoes" : {
-                        "213": "Tentar sua sorte na sala 213",
-                        "terceiro andar": "Já falou com o veterano?",
-                        "predio novo": "desca pelo tobogã!"
-            }
-        },
-        "213":{
-            "titulo": "Sala misteriosa 213",
-            "descricao" : "Será que voce possui a chave para a sala 213?",
-            "destino": "teletransporte"
-        },
-        "teletransporte": {
-                "titulo": "Sala de teletransporte",
-                "descricao": "Bem vindo a sala de teletransporte! Aqui voce pode ter acesso a TODAS as salas contando que voce saiba o nome delas!. ",
-                "opcoes": {
-                        "?????": "??????????"
-            }
-        }
-                 
-    }
-        
-    nome_cenario_atual = "inicio"
-    return cenarios, nome_cenario_atual
+import json
 
+with open ("cenario.json", 'r',encoding='utf8') as arquivo:
+    cenarios = json.load(arquivo)
+print(cenarios['inicio'])
+        
+    
 #lista inventário
     
 
 
 
 def main():
+    nome_cenario_atual = "inicio"
     print("Na hora do sufoco!")
     print("------------------")
     print()
@@ -207,7 +32,7 @@ def main():
         "adiamento do EP (boa sorte...)")
     print()
 
-    cenarios, nome_cenario_atual = carregar_cenarios()
+#    cenarios, nome_cenario_atual = carregar_cenarios()
 
     game_over = False
     ganhou = False
@@ -300,7 +125,7 @@ def main():
                     print ()
                     print ("Oh não! Essa sala esta bloqueada! Tente achar a chave que abra essa porta")
             #sala segundo andar
-            elif nome_cenario_atual == "213":
+            elif nome_cenario_atual == "sala 213":
                 if "chave segundo andar"in inventario:
                     print ()
                     print ("Parabens! Voce tem acesso à sala de teletransporte")

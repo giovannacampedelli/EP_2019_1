@@ -11,7 +11,6 @@ import json
 
 with open ("cenario.json", 'r',encoding='utf8') as arquivo:
     cenarios = json.load(arquivo)
-print(cenarios['inicio'])
         
     
 #lista inventário
@@ -65,6 +64,10 @@ def main():
                     print(" -> {0}: {1} \n".format(e, desc))
                 print()
                 escolha = input("Para onde você deseja ir?: ")
+                if escolha not in cenarios:
+                    print ()
+                    print("Sua indecisão foi sua ruína!")
+                    game_over = True
                 nome_cenario_atual = escolha
             
             else:

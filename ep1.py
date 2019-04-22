@@ -86,6 +86,20 @@ def main():
                     print("Sua indecisão foi sua ruína!")
                     game_over = True
                     
+         #sala para o teletransporte
+           
+        elif nome_cenario_atual == "sala 213":
+            if "chave segundo andar"in inventario:
+                    print ()
+                    print ("Parabens! Voce tem acesso à sala de teletransporte")
+                    print ("Sempre que digitar: teletransporte, consiguira escolher seu destino")
+                    nome_cenario_atual = cenario_atual["destino"]
+            else:
+                    print ()
+                    print ("Voce nao tem acesso a essa sala. Tente pegar uma chave")
+                    nome_cenario_atual = cenario_atual ["destino1"]
+                     
+                    
         else:
             #vida com livro
             if nome_cenario_atual == "pegar livro":
@@ -127,19 +141,7 @@ def main():
                 else: 
                     print ()
                     print ("Oh não! Essa sala esta bloqueada! Tente achar a chave que abra essa porta")
-            #sala segundo andar
-            elif nome_cenario_atual == "sala 213":
-                if "chave segundo andar"in inventario:
-                    print ()
-                    print ("Parabens! Voce tem acesso à sala de teletransporte")
-                    print ("Sempre que digitar: teletransporte, consiguira escolher seu destino")
-                    nome_cenario_atual = cenario_atual["destino"]
-                else:
-                    print ()
-                    print ("Voce nao tem acesso a essa sala. Tente pegar uma chave")
-                    
-                
-            #luta golem
+                    #luta golem
             elif nome_cenario_atual == "garagem":
                  Pergunta = input("Voce quer atacar ou fugir?")
                  

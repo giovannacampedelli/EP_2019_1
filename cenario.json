@@ -162,7 +162,8 @@
         "sala 213":{
             "titulo": "Sala misteriosa 213",
             "descricao" : "Será que você possui a chave para a sala 213?",
-            "destino": "teletransporte"
+            "destino": "teletransporte",
+			"destino1" : "segundo andar"
         },
         "teletransporte": {
                 "titulo": "Sala de teletransporte",
